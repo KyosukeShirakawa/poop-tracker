@@ -4,10 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -34,4 +38,11 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id"))
     private Set<Food> avoidFoodList;
+
+
+    public User(String name) {
+        logs = new ArrayList<>();
+        safeFoodList = new HashSet<>();
+        avoidFoodList = new HashSet<>();
+    }
 }
