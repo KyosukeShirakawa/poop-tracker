@@ -4,6 +4,7 @@ import com.poop_tracker.dto.UserDTO;
 import com.poop_tracker.mapper.UserMapper;
 import com.poop_tracker.repository.UserRepository;
 import com.poop_tracker.service.IUserService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements IUserService {
     private UserRepository userRepository;
 
