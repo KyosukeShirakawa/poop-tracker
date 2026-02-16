@@ -1,12 +1,14 @@
 package com.poop_tracker.service.impl;
 
 import com.poop_tracker.dto.UserDTO;
+import com.poop_tracker.entity.User;
 import com.poop_tracker.mapper.UserMapper;
 import com.poop_tracker.repository.UserRepository;
 import com.poop_tracker.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import tools.jackson.databind.cfg.MapperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,5 +22,13 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream().map((user) -> UserMapper.mapToUserDto(user)).collect(Collectors.toList());
+    }
+
+    @Override
+    public UserDTO createUser(UserDTO userDTO) {
+        User user = UserMapper.mapToUser(userDTO);
+        User savedUser = userRepository.save(user);
+
+        return UserMapper.mapToUserDto(savedUser);
     }
 }

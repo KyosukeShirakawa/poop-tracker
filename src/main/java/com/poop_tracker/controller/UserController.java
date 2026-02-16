@@ -6,10 +6,7 @@ import com.poop_tracker.service.IUserService;
 import com.poop_tracker.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping
-    ResponseEntity<UserDTO> createUser(){
-        return null;
+    ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
+        return ResponseEntity.ok(userService.createUser(userDTO));
     }
 }
