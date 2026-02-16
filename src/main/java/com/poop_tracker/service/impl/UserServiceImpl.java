@@ -2,6 +2,7 @@ package com.poop_tracker.service.impl;
 
 import com.poop_tracker.dto.UserDTO;
 import com.poop_tracker.entity.User;
+import com.poop_tracker.exception.ResourceNotFoundException;
 import com.poop_tracker.mapper.UserMapper;
 import com.poop_tracker.repository.UserRepository;
 import com.poop_tracker.service.IUserService;
@@ -22,6 +23,13 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream().map((user) -> UserMapper.mapToUserDto(user)).collect(Collectors.toList());
+    }
+
+    @Override
+    public UserDTO getUserById(Long userId) {
+        User user =  userRepository.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User not found with id: " + userId));
+
+        return UserMapper.mapToUserDto(user);
     }
 
     @Override

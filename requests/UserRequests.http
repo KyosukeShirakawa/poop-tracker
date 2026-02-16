@@ -1,5 +1,8 @@
-### GET all employees
+### GET all users
 GET http://localhost:8080/users
+
+### GET users by id
+GET http://localhost:8080/users/2
 
 ###
 POST http://localhost:8080/users
