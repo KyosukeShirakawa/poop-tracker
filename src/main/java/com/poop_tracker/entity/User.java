@@ -1,4 +1,4 @@
-package com.poop_tracker.entities;
+package com.poop_tracker.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,12 +26,12 @@ public class User {
             name = "safe_food_list",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id"))
-    private Set<Food> safeFoodlist;
+    private Set<Food> safeFoodList;
 
     @ManyToMany
     @JoinTable(
             name = "avoid_food_list",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "food_id"))
-    private Set<Food> avoidFoodlist;
+    private Set<Food> avoidFoodList;
 }

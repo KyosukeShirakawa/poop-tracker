@@ -1,21 +1,23 @@
-package com.poop_tracker.entities;
+package com.poop_tracker.entity;
+
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Poop {
+public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Size size;
-    private Color color;
-    private Softness softness;
-    @OneToOne
-    private DailyLog log;
+    private String name;
+
+    @ManyToMany(mappedBy = "foodsEaten")
+    private Set<DailyLog> dailyLogs;
 }

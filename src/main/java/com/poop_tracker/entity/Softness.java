@@ -1,4 +1,4 @@
-package com.poop_tracker.entities;
+package com.poop_tracker.entity;
 
 public enum Softness {
     WATERY,
