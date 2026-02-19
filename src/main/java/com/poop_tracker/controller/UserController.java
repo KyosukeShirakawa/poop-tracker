@@ -1,5 +1,6 @@
 package com.poop_tracker.controller;
 
+import com.poop_tracker.dto.CreateUserDTO;
 import com.poop_tracker.dto.UserDTO;
 import com.poop_tracker.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -25,12 +26,12 @@ public class UserController {
     }
 
     @PostMapping
-    ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
+    ResponseEntity<UserDTO> createUser(@RequestBody CreateUserDTO userDTO){
         return ResponseEntity.ok(userService.createUser(userDTO));
     }
 
     @PutMapping("/{userId}")
-    ResponseEntity<UserDTO> updateUserById(@PathVariable Long userId, @RequestBody UserDTO userDTO) {
+    ResponseEntity<UserDTO> updateUserById(@PathVariable Long userId, @RequestBody CreateUserDTO userDTO) {
         return ResponseEntity.ok(userService.updateUserById(userId, userDTO));
     }
 

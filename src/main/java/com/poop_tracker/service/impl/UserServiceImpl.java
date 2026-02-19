@@ -1,5 +1,6 @@
 package com.poop_tracker.service.impl;
 
+import com.poop_tracker.dto.CreateUserDTO;
 import com.poop_tracker.dto.UserDTO;
 import com.poop_tracker.entity.User;
 import com.poop_tracker.exception.ResourceNotFoundException;
@@ -33,18 +34,20 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserDTO createUser(UserDTO userDTO) {
-        User user = UserMapper.mapToUser(userDTO);
+    public UserDTO createUser(CreateUserDTO userDTO) {
+        User user = UserMapper.mapToUserForCreate(userDTO);
         User savedUser = userRepository.save(user);
 
         return UserMapper.mapToUserDto(savedUser);
     }
 
     @Override
-    public UserDTO updateUserById(Long userID, UserDTO userDTO) {
+    public UserDTO updateUserById(Long userID, CreateUserDTO userDTO) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userID));
 
         user.setName(userDTO.getName());
+        System.out.println(userDTO);
+        user.setPassword(userDTO.getPassword());
 
         User updatedUser = userRepository.save(user);
 

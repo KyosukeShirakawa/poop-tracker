@@ -2,22 +2,24 @@
 GET http://localhost:8080/users
 
 ### GET users by id
-GET http://localhost:8080/users/2
+GET http://localhost:8080/users/3
 
 ###
 POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "name": "Aaaaa"
+  "name": "Aaaaa",
+  "password": "aaaa2026"
 }
 
 ###
-PUT  http://localhost:8080/users/3
+PUT  http://localhost:8080/users/6
 Content-Type: application/json
 
 {
-  "name": "Bbbbb"
+  "name": "Bbbbb",
+  "password": "bbbb2026"
 }
 ###
 DELETE http://localhost:8080/users/2
