@@ -30,4 +30,12 @@ public class UserController {
     ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO){
         return ResponseEntity.ok(userService.createUser(userDTO));
     }
+
+    @DeleteMapping("/{userId}")
+    ResponseEntity<String> deleteUser(@PathVariable Long userId) {
+        userService.deleteUser(userId);
+        return ResponseEntity.ok("User successfully delete with ID: " + userId);
+    }
+
+
 }
