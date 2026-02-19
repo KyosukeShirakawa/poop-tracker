@@ -1,5 +1,6 @@
 package com.poop_tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,5 +34,6 @@ public class DailyLog {
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @JsonIgnore
     private User user;
 }

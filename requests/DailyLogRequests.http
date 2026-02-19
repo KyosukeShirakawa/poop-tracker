@@ -1,0 +1,11 @@
+### GET request to example server
+GET http://localhost:8080/users/1/logs
+
+
+###
+POST http://localhost:8080/users/1/logs
+Content-Type: application/json
+
+{
+  "date": "2026-02-19"
+}
