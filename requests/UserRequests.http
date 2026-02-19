@@ -9,7 +9,15 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "name": "Kyosuke shirakawa"
+  "name": "Aaaaa"
+}
+
+###
+PUT  http://localhost:8080/users/3
+Content-Type: application/json
+
+{
+  "name": "Bbbbb"
 }
 ###
 DELETE http://localhost:8080/users/2

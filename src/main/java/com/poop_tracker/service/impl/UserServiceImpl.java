@@ -41,6 +41,17 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public UserDTO updateUserById(Long userID, UserDTO userDTO) {
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userID));
+
+        user.setName(userDTO.getName());
+
+        User updatedUser = userRepository.save(user);
+
+        return UserMapper.mapToUserDto(updatedUser);
+    }
+
+    @Override
     public void deleteUser(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
         userRepository.delete(user);
