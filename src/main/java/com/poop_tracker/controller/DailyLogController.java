@@ -16,8 +16,8 @@ import java.util.List;
 public class DailyLogController {
     DailyLogServiceImpl dailyLogService;
     @GetMapping
-    public ResponseEntity<List<DailyLog>> getAllDailyLogs() {
-        return ResponseEntity.ok(dailyLogService.getAllDailyLogs());
+    public ResponseEntity<List<DailyLog>> getAllDailyLogs(@PathVariable Long userId) {
+        return ResponseEntity.ok(dailyLogService.getAllDailyLogs(userId));
     }
 
     @PostMapping
