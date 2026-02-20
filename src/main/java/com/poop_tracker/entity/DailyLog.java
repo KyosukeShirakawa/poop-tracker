@@ -1,10 +1,13 @@
 package com.poop_tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -19,9 +22,10 @@ public class DailyLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "log")
+    @OneToOne(mappedBy = "log", cascade = CascadeType.ALL)
     private Poop poop;
 
+    @UpdateTimestamp
     private LocalDate date;
 
     @ManyToMany
