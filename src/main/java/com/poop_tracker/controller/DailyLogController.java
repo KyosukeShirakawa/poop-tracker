@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,6 +19,11 @@ public class DailyLogController {
     @GetMapping
     public ResponseEntity<List<DailyLog>> getAllDailyLogs(@PathVariable Long userId) {
         return ResponseEntity.ok(dailyLogService.getAllDailyLogs(userId));
+    }
+
+    @GetMapping("/{date}")
+    public ResponseEntity<DailyLog> getDailyLogByDate(@PathVariable Long userId, @PathVariable LocalDate date) {
+        return ResponseEntity.ok(dailyLogService.getDailyLogByDate(userId, date));
     }
 
     @PostMapping

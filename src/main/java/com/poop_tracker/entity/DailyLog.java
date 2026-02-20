@@ -25,7 +25,7 @@ public class DailyLog {
     @OneToOne(mappedBy = "log", cascade = CascadeType.ALL)
     private Poop poop;
 
-    @UpdateTimestamp
+    @CreationTimestamp
     private LocalDate date;
 
     @ManyToMany

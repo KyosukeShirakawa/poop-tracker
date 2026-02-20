@@ -9,7 +9,9 @@ import com.poop_tracker.service.IDailyLogService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -20,9 +22,17 @@ public class DailyLogServiceImpl implements IDailyLogService {
     @Override
     public List<DailyLog> getAllDailyLogs(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user not found with Id: " + userId));
-
-
         return user.getLogs();
+    }
+
+    @Override
+    public DailyLog getDailyLogByDate(Long userId, LocalDate date) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with Id: " + userId));
+        List<DailyLog> logs = user.getLogs();
+        return logs.stream()
+                .filter(log-> log.getDate().isEqual(date))
+                .findAny()
+                .orElse(null);
     }
 
     @Override
