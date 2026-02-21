@@ -1,5 +1,5 @@
 ### GET request to example server
-GET http://localhost:8080/users/4/logs
+GET http://localhost:8080/users/8/logs
 
 ###
 GET http://localhost:8080/users/4/logs/2026-02-20
@@ -11,3 +11,6 @@ Content-Type: application/json
 
 {
 }
+
+####
+DELETE http://localhost:8080/users/8/logs/18

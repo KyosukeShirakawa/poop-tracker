@@ -47,4 +47,17 @@ public class DailyLogServiceImpl implements IDailyLogService {
 
         return dailyLog;
     }
+
+    @Override
+    public String deleteDailyLog(Long userId, Long logId) {
+        DailyLog dailyLog = dailyLogRepository.findById(logId).orElseThrow(() -> new ResourceNotFoundException("Log not found with Id: " +  logId));
+        if(!dailyLog.getUser().getId().equals(userId)) {
+            return "User with ID: " + userId + " is not authorized to delete the log";
+        }
+
+        dailyLogRepository.deleteById(logId);
+
+
+        return "Log is successfully deleted";
+    }
 }
