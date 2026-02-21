@@ -36,13 +36,15 @@ public class DailyLogServiceImpl implements IDailyLogService {
     }
 
     @Override
-    public DailyLog getDailyLogByDate(Long userId, LocalDate date) {
+    public DailyLogDto getDailyLogByDate(Long userId, LocalDate date) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with Id: " + userId));
         List<DailyLog> logs = user.getLogs();
-        return logs.stream()
+        DailyLog matchedLog=  logs.stream()
                 .filter(log-> log.getDate().isEqual(date))
                 .findAny()
                 .orElse(null);
+
+        return DailyLogMapper.mapToDailyLogDto(matchedLog);
     }
 
     @Override

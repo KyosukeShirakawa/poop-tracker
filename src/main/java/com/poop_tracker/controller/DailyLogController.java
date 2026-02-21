@@ -4,7 +4,6 @@ import com.poop_tracker.dto.DailyLogDto;
 import com.poop_tracker.dto.PoopDTO;
 import com.poop_tracker.entity.*;
 import com.poop_tracker.service.impl.DailyLogServiceImpl;
-import com.poop_tracker.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class DailyLogController {
     }
 
     @GetMapping("/{date}")
-    public ResponseEntity<DailyLog> getDailyLogByDate(@PathVariable Long userId, @PathVariable LocalDate date) {
+    public ResponseEntity<DailyLogDto> getDailyLogByDate(@PathVariable Long userId, @PathVariable LocalDate date) {
         return ResponseEntity.ok(dailyLogService.getDailyLogByDate(userId, date));
     }
 
