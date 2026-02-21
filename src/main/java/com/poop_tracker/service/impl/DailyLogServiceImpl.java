@@ -26,9 +26,13 @@ public class DailyLogServiceImpl implements IDailyLogService {
     UserRepository userRepository;
 
     @Override
-    public List<DailyLog> getAllDailyLogs(Long userId) {
+    public List<DailyLogDto> getAllDailyLogs(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user not found with Id: " + userId));
-        return user.getLogs();
+
+        List<DailyLog> logs = user.getLogs();
+
+
+        return logs.stream().map(log -> DailyLogMapper.mapToDailyLogDto(log)).toList();
     }
 
     @Override
