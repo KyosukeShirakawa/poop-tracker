@@ -1,10 +1,12 @@
 package com.poop_tracker.service.impl;
 
+import com.poop_tracker.dto.DailyLogDto;
 import com.poop_tracker.dto.PoopDTO;
 import com.poop_tracker.entity.DailyLog;
 import com.poop_tracker.entity.Poop;
 import com.poop_tracker.entity.User;
 import com.poop_tracker.exception.ResourceNotFoundException;
+import com.poop_tracker.mapper.DailyLogMapper;
 import com.poop_tracker.mapper.PoopMapper;
 import com.poop_tracker.repository.DailyLogRepository;
 import com.poop_tracker.repository.UserRepository;
@@ -65,7 +67,7 @@ public class DailyLogServiceImpl implements IDailyLogService {
     }
 
     @Override
-    public DailyLog recordPoopToDailyLog(Long userId, Long logId, PoopDTO poopDTO) {
+    public DailyLogDto recordPoopToDailyLog(Long userId, Long logId, PoopDTO poopDTO) {
         DailyLog dailyLog = dailyLogRepository.findById(logId).orElseThrow(() -> new ResourceNotFoundException("Log not found with Id: " + logId));
 
         if(!dailyLog.getUser().getId().equals(userId)) {
@@ -78,6 +80,7 @@ public class DailyLogServiceImpl implements IDailyLogService {
         poop.setLog(dailyLog);
 
 
-        return dailyLogRepository.save(dailyLog);
+
+        return DailyLogMapper.mapToDailyLogDto(dailyLogRepository.save(dailyLog));
     }
 }

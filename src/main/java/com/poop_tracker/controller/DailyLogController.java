@@ -1,5 +1,6 @@
 package com.poop_tracker.controller;
 
+import com.poop_tracker.dto.DailyLogDto;
 import com.poop_tracker.dto.PoopDTO;
 import com.poop_tracker.entity.*;
 import com.poop_tracker.service.impl.DailyLogServiceImpl;
@@ -37,7 +38,7 @@ public class DailyLogController {
     }
 
     @PostMapping("/{logId}")
-    public ResponseEntity<DailyLog> recordPoopToDailyLog(@PathVariable Long userId, @PathVariable Long logId, @RequestBody PoopDTO poopDTO) {
+    public ResponseEntity<DailyLogDto> recordPoopToDailyLog(@PathVariable Long userId, @PathVariable Long logId, @RequestBody PoopDTO poopDTO) {
         return ResponseEntity.ok(dailyLogService.recordPoopToDailyLog(userId, logId, poopDTO));
     }
 
