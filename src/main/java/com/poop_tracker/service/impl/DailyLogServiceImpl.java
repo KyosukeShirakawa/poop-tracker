@@ -43,6 +43,6 @@ public class DailyLogServiceImpl implements IDailyLogService {
         dailyLog.setUser(user);
         userRepository.save(user);
 
-        return dailyLogRepository.save(dailyLog);
+        return dailyLog;
     }
 }

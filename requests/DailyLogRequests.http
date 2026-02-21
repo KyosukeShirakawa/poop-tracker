@@ -2,11 +2,11 @@
 GET http://localhost:8080/users/4/logs
 
 ###
-GET http://localhost:8080/users/3/logs/2026-02-20
+GET http://localhost:8080/users/4/logs/2026-02-20
 
 
 ###
-POST http://localhost:8080/users/4/logs
+POST http://localhost:8080/users/6/logs
 Content-Type: application/json
 
 {

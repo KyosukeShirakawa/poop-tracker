@@ -12,10 +12,19 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "daily_log")
+@Table(
+        name = "daily_log",
+        uniqueConstraints = {
+            @UniqueConstraint(
+                    name = "OneLogADayPerUser",
+                    columnNames = {"user_id", "date"}
+            )
+        }
+    )
 @NoArgsConstructor
 @Data
 public class DailyLog {
@@ -27,6 +36,7 @@ public class DailyLog {
     private Poop poop;
 
     @CreationTimestamp
+    @Column(nullable = false)
     private LocalDate date;
 
     @ManyToMany
