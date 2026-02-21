@@ -6,6 +6,7 @@ import com.poop_tracker.exception.ResourceNotFoundException;
 import com.poop_tracker.repository.DailyLogRepository;
 import com.poop_tracker.repository.UserRepository;
 import com.poop_tracker.service.IDailyLogService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +37,10 @@ public class DailyLogServiceImpl implements IDailyLogService {
     }
 
     @Override
-    public DailyLog createDailyLog(Long userId, DailyLog dailyLog) {
+    @Transactional
+    public DailyLog createDailyLog(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user not found with Id: "+ userId));
-
+        DailyLog dailyLog = new DailyLog(user);
         user.getLogs().add(dailyLog);
         dailyLog.setUser(user);
         userRepository.save(user);

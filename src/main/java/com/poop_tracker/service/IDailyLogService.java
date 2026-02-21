@@ -8,6 +8,6 @@ import java.util.List;
 public interface IDailyLogService {
     List<DailyLog> getAllDailyLogs(Long userId);
     DailyLog getDailyLogByDate(Long userId, LocalDate date);
-    DailyLog createDailyLog(Long userId, DailyLog dailyLog);
+    DailyLog createDailyLog(Long userId);
 
 }
