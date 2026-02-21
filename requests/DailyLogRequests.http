@@ -14,3 +14,13 @@ Content-Type: application/json
 
 ####
 DELETE http://localhost:8080/users/8/logs/18
+
+####
+POST http://localhost:8080/users/8/logs/19
+Content-Type: application/json
+
+{
+  "size": "BIG",
+  "color": "BROWN",
+  "softness": "NORMAL"
+}

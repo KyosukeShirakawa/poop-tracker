@@ -1,7 +1,7 @@
 package com.poop_tracker.controller;
 
-import com.poop_tracker.entity.DailyLog;
-import com.poop_tracker.entity.User;
+import com.poop_tracker.dto.PoopDTO;
+import com.poop_tracker.entity.*;
 import com.poop_tracker.service.impl.DailyLogServiceImpl;
 import com.poop_tracker.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
@@ -35,4 +35,11 @@ public class DailyLogController {
     public ResponseEntity<String> deleteDailyLog(@PathVariable Long userId, @PathVariable Long logId) {
         return ResponseEntity.ok(dailyLogService.deleteDailyLog(userId, logId));
     }
+
+    @PostMapping("/{logId}")
+    public ResponseEntity<DailyLog> recordPoopToDailyLog(@PathVariable Long userId, @PathVariable Long logId, @RequestBody PoopDTO poopDTO) {
+        return ResponseEntity.ok(dailyLogService.recordPoopToDailyLog(userId, logId, poopDTO));
+    }
+
+
 }
