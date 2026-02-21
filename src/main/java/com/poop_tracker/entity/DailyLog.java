@@ -3,6 +3,7 @@ package com.poop_tracker.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,11 +11,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "daily_log")
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class DailyLog {
@@ -40,4 +41,13 @@ public class DailyLog {
     @JoinColumn(name="user_id")
     @JsonIgnore
     private User user;
+
+    public DailyLog(User user) {
+        if(user==null) {
+            throw new IllegalArgumentException("User is not defined");
+        }
+
+        this.user = user;
+        foodsEaten = new HashSet<>();
+    }
 }
