@@ -2,7 +2,7 @@
 GET http://localhost:8080/users/1/logs
 
 ###
-GET http://localhost:8080/users/13/logs/2026-02-23
+GET http://localhost:8080/users/1/logs/2026-02-21
 
 
 ###
