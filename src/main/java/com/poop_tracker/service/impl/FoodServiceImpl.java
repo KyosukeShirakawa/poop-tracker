@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -16,6 +15,12 @@ public class FoodServiceImpl implements IFoodService {
     FoodRepository foodRepository;
     public List<Food> getAllFoods(){
         return foodRepository.findAll();
+    }
+
+    @Override
+    public Food getFoodByName(String foodname) {
+        return foodRepository.findByName(foodname)
+                .orElseThrow(() -> new ResourceNotFoundException("Food not found with name: " + foodname));
     }
 
     @Override

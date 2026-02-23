@@ -19,6 +19,11 @@ public class FoodController {
         return ResponseEntity.ok(foodService.getAllFoods());
     }
 
+    @GetMapping("/{foodname}")
+    public ResponseEntity<Food> getFoodByName(@PathVariable String foodname) {
+        return ResponseEntity.ok(foodService.getFoodByName(foodname));
+    }
+
     @PostMapping
     public ResponseEntity<Food> createFood(@RequestBody Food food) {
         return ResponseEntity.ok(foodService.createFood(food));

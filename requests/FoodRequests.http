@@ -1,14 +1,16 @@
 ### GET request to example server
 GET http://localhost:8080/foods
+###
+GET http://localhost:8080/foods/WALNUTS
+
 
 ###
 POST http://localhost:8080/foods
 Content-Type: application/json
 
 {
-  "name": "ChickenThigh"
+  "name": "rice"
 }
-
 
 ###
 DELETE http://localhost:8080/foods/5
