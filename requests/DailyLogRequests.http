@@ -2,11 +2,11 @@
 GET http://localhost:8080/users/1/logs
 
 ###
-GET http://localhost:8080/users/1/logs/2026-02-21
+GET http://localhost:8080/users/1/logs/2026-02-23
 
 
 ###
-POST http://localhost:8080/users/1/logs
+POST http://localhost:8080/users/14/logs
 Content-Type: application/json
 
 {
@@ -24,3 +24,9 @@ Content-Type: application/json
   "color": "DARK_BROWN",
   "softness": "SOFT"
 }
+
+####
+POST http://localhost:8080/users/14/logs/36/foods
+Content-Type: application/json
+
+["broccoli"]

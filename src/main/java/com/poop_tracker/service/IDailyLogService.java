@@ -2,7 +2,6 @@ package com.poop_tracker.service;
 
 import com.poop_tracker.dto.DailyLogDto;
 import com.poop_tracker.dto.PoopDTO;
-import com.poop_tracker.entity.DailyLog;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,6 +11,6 @@ public interface IDailyLogService {
     DailyLogDto getDailyLogByDate(Long userId, LocalDate date);
     DailyLogDto createDailyLog(Long userId);
     String deleteDailyLog(Long userId, Long logId);
-    DailyLogDto recordPoopToDailyLog(Long userId, Long LogId, PoopDTO poopDTO);
-
+    DailyLogDto recordPoopToDailyLog(Long userId, Long logId, PoopDTO poopDTO);
+    DailyLogDto addFoodsToLog(Long userId, Long logId, List<String> foods);
 }

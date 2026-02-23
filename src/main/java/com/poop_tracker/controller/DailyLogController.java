@@ -41,5 +41,10 @@ public class DailyLogController {
         return ResponseEntity.ok(dailyLogService.recordPoopToDailyLog(userId, logId, poopDTO));
     }
 
+    @PostMapping("/{logId}/foods")
+    public ResponseEntity<DailyLogDto> addFoodsToDailylog(@PathVariable Long userId, @PathVariable Long logId, @RequestBody List<String> foods) {
+        return ResponseEntity.ok(dailyLogService.addFoodsToLog(userId, logId, foods));
+    }
+
 
 }

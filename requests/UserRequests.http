@@ -2,15 +2,15 @@
 GET http://localhost:8080/users
 
 ### GET users by id
-GET http://localhost:8080/users/1
+GET http://localhost:8080/users/14
 
 ###
 POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "name": "kyo",
-  "password": "dddd1222"
+  "name": "Fanni",
+  "password": "fanni0430"
 }
 
 ###
@@ -22,4 +22,4 @@ Content-Type: application/json
   "password": "kyosuke0527"
 }
 ###
-DELETE http://localhost:8080/users/11
+DELETE http://localhost:8080/users/13

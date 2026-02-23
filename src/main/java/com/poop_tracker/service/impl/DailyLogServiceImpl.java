@@ -3,12 +3,14 @@ package com.poop_tracker.service.impl;
 import com.poop_tracker.dto.DailyLogDto;
 import com.poop_tracker.dto.PoopDTO;
 import com.poop_tracker.entity.DailyLog;
+import com.poop_tracker.entity.Food;
 import com.poop_tracker.entity.Poop;
 import com.poop_tracker.entity.User;
 import com.poop_tracker.exception.ResourceNotFoundException;
 import com.poop_tracker.mapper.DailyLogMapper;
 import com.poop_tracker.mapper.PoopMapper;
 import com.poop_tracker.repository.DailyLogRepository;
+import com.poop_tracker.repository.FoodRepository;
 import com.poop_tracker.repository.UserRepository;
 import com.poop_tracker.service.IDailyLogService;
 import jakarta.transaction.Transactional;
@@ -17,13 +19,13 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class DailyLogServiceImpl implements IDailyLogService {
     DailyLogRepository dailyLogRepository;
     UserRepository userRepository;
+    FoodRepository foodRepository;
 
     @Override
     public List<DailyLogDto> getAllDailyLogs(Long userId) {
@@ -80,7 +82,24 @@ public class DailyLogServiceImpl implements IDailyLogService {
         dailyLog.setPoop(poop);
         poop.setLog(dailyLog);
 
+        return DailyLogMapper.mapToDailyLogDto(dailyLogRepository.save(dailyLog));
+    }
 
+    @Override
+    public DailyLogDto addFoodsToLog(Long userId, Long logId, List<String> foods) {
+        DailyLog dailyLog = dailyLogRepository.findById(logId).orElseThrow(() -> new ResourceNotFoundException("Log not found with Id: " +  logId));
+        if(!dailyLog.getUser().getId().equals(userId)) {
+            throw new IllegalArgumentException("User is not authorized to add food to the log");
+        }
+
+        List<String> foodnames = foods.stream().map( food -> food.trim().toLowerCase()).toList();
+
+        List<Food> foodObjToSave = foodnames.stream().map(food ->
+            foodRepository.findByName(food)
+                    .orElseGet(() -> foodRepository.save(new Food(food)))
+        ).toList();
+
+        foodObjToSave.forEach((food) ->dailyLog.getFoodsEaten().add(food) );
 
         return DailyLogMapper.mapToDailyLogDto(dailyLogRepository.save(dailyLog));
     }

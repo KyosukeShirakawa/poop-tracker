@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -18,4 +17,8 @@ public class Food {
     private Long id;
     @Column(unique = true, nullable = true)
     private String name;
+
+    public Food(String name){
+        this.name = name;
+    }
 }
