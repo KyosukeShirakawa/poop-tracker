@@ -2,3 +2,9 @@
 GET http://localhost:8080/foods
 
 ###
+POST http://localhost:8080/foods
+Content-Type: application/json
+
+{
+  "name": "banana"
+}

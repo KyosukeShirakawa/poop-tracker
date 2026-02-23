@@ -17,6 +17,11 @@ public class FoodServiceImpl implements IFoodService {
         return foodRepository.findAll();
     }
 
+    @Override
+    public Food createFood(Food food) {
+        return foodRepository.save(food);
+    }
+
 
 
 

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IFoodService {
     List<Food> getAllFoods();
+    Food createFood(Food food);
 }
