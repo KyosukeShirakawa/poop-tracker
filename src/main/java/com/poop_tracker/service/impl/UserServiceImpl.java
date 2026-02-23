@@ -23,7 +23,13 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<UserDTO> getAllUsers() {
-        return userRepository.findAll().stream().map((user) -> UserMapper.mapToUserDto(user)).collect(Collectors.toList());
+        System.out.println("getAllusers in userServiceimpl");
+        List<User> users = userRepository.findAll();
+        for (User user: users) {
+            System.out.println("user id: " + user.getId() + " user name: " + user.getName());
+
+        }
+        return users.stream().map((user) -> UserMapper.mapToUserDto(user)).toList();
     }
 
     @Override

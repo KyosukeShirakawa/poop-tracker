@@ -16,6 +16,5 @@ public class DailyLogDto {
     private LocalDate date;
     private PoopDTO poopDTO;
     private Set<Food> foodsEaten;
-    @JsonIgnore
-    private UserDTO userDTO;
+    private Long userId;
 }

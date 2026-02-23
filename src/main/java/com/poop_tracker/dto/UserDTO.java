@@ -16,7 +16,7 @@ import java.util.Set;
 public class UserDTO {
     private Long id;
     private String name;
-    private List<DailyLog> logs;
+    private List<DailyLogDto> logs;
     private Set<Food> safeFoodList;
     private Set<Food> avoidFoodList;
 }

@@ -16,7 +16,7 @@ public class CreateUserDTO {
     private Long id;
     private String name;
     private String password;
-    private List<DailyLog> logs;
+    private List<DailyLogDto> logs;
     private Set<Food> safeFoodList;
     private Set<Food> avoidFoodList;
 }

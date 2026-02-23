@@ -9,12 +9,14 @@ import com.poop_tracker.entity.User;
 
 public class DailyLogMapper {
     public static DailyLogDto mapToDailyLogDto(DailyLog dailyLog) {
+        if(dailyLog==null) {
+            return null;
+        }
         DailyLogDto dailyLogDto = new DailyLogDto();
 
-        UserDTO userDTO = UserMapper.mapToUserDto(dailyLog.getUser());
         PoopDTO poopDTO = PoopMapper.mapToPoopDto(dailyLog.getPoop());
 
-        dailyLogDto.setUserDTO(userDTO);
+        dailyLogDto.setUserId(dailyLog.getUser().getId());
         dailyLogDto.setPoopDTO(poopDTO);
         dailyLogDto.setDate(dailyLog.getDate());
         dailyLogDto.setFoodsEaten(dailyLog.getFoodsEaten());
@@ -22,12 +24,11 @@ public class DailyLogMapper {
         return dailyLogDto;
     }
     public static DailyLog mapToDailyLog(DailyLogDto dailyLogDto) {
+        if (dailyLogDto==null) {
+            return null;
+        }
         DailyLog dailyLog = new DailyLog();
-
-        User user = dailyLog.getUser();
         Poop poop = dailyLog.getPoop();
-
-        dailyLog.setUser(user);
         dailyLog.setPoop(poop);
         dailyLog.setDate(dailyLogDto.getDate());
         dailyLog.setFoodsEaten(dailyLogDto.getFoodsEaten());
