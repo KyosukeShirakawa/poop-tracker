@@ -6,6 +6,9 @@ import com.poop_tracker.entity.Poop;
 public class PoopMapper {
     public static PoopDTO mapToPoopDto(Poop poop) {
         PoopDTO poopDTO = new PoopDTO();
+        if(poop==null) {
+            return null;
+        }
         poopDTO.setColor(poop.getColor());
         poopDTO.setSize(poop.getSize());
         poopDTO.setSoftness(poop.getSoftness());
