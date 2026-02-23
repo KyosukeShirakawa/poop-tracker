@@ -39,6 +39,9 @@ public class DailyLogServiceImpl implements IDailyLogService {
     public DailyLogDto getDailyLogByDate(Long userId, LocalDate date) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with Id: " + userId));
         List<DailyLog> logs = user.getLogs();
+        if(logs.isEmpty()) {
+            return null;
+        }
         DailyLog matchedLog=  logs.stream()
                 .filter(log-> log.getDate().isEqual(date))
                 .findAny()
@@ -49,14 +52,14 @@ public class DailyLogServiceImpl implements IDailyLogService {
 
     @Override
     @Transactional
-    public DailyLog createDailyLog(Long userId) {
+    public DailyLogDto createDailyLog(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user not found with Id: "+ userId));
         DailyLog dailyLog = new DailyLog(user);
         user.getLogs().add(dailyLog);
         dailyLog.setUser(user);
         userRepository.save(user);
 
-        return dailyLog;
+        return DailyLogMapper.mapToDailyLogDto(dailyLog);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class DailyLogController {
     }
 
     @PostMapping
-    public ResponseEntity<DailyLog> createDailyLog(@PathVariable Long userId) {
+    public ResponseEntity<DailyLogDto> createDailyLog(@PathVariable Long userId) {
         return ResponseEntity.ok(dailyLogService.createDailyLog(userId));
     }
 

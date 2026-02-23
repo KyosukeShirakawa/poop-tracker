@@ -10,7 +10,7 @@ import java.util.List;
 public interface IDailyLogService {
     List<DailyLogDto> getAllDailyLogs(Long userId);
     DailyLogDto getDailyLogByDate(Long userId, LocalDate date);
-    DailyLog createDailyLog(Long userId);
+    DailyLogDto createDailyLog(Long userId);
     String deleteDailyLog(Long userId, Long logId);
     DailyLogDto recordPoopToDailyLog(Long userId, Long LogId, PoopDTO poopDTO);
 
