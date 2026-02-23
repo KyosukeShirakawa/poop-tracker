@@ -23,12 +23,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<UserDTO> getAllUsers() {
-        System.out.println("getAllusers in userServiceimpl");
         List<User> users = userRepository.findAll();
-        for (User user: users) {
-            System.out.println("user id: " + user.getId() + " user name: " + user.getName());
-
-        }
         return users.stream().map((user) -> UserMapper.mapToUserDto(user)).toList();
     }
 
@@ -52,7 +47,6 @@ public class UserServiceImpl implements IUserService {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userID));
 
         user.setName(userDTO.getName());
-        System.out.println(userDTO);
         user.setPassword(userDTO.getPassword());
 
         User updatedUser = userRepository.save(user);
