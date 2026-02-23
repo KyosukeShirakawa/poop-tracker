@@ -8,19 +8,22 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class FoodServiceImpl implements IFoodService {
     FoodRepository foodRepository;
-
     public List<Food> getAllFoods(){
         return foodRepository.findAll();
     }
 
     @Override
     public Food createFood(Food food) {
-        return foodRepository.save(food);
+        String foodName = food.getName().trim().toLowerCase();
+        food.setName(foodName);
+
+       return  foodRepository.findByName(foodName).orElseGet(() -> foodRepository.save(food));
     }
 
     @Override
