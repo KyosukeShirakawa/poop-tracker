@@ -10,6 +10,7 @@ public interface IUserService {
     UserDTO getUserById(Long userId);
     UserDTO createUser(CreateUserDTO userDTO);
     UserDTO updateUserById(Long userID, CreateUserDTO userDTO);
-    void deleteUser(Long userId);
+    String deleteUser(Long userId);
+
 
 }
