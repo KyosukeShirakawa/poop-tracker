@@ -1,12 +1,12 @@
 ### GET request to example server
-GET http://localhost:8080/users/13/logs
+GET http://localhost:8080/users/1/logs
 
 ###
 GET http://localhost:8080/users/13/logs/2026-02-23
 
 
 ###
-POST http://localhost:8080/users/13/logs
+POST http://localhost:8080/users/1/logs
 Content-Type: application/json
 
 {
@@ -16,11 +16,11 @@ Content-Type: application/json
 DELETE http://localhost:8080/users/9/logs/27
 
 ####
-POST http://localhost:8080/users/13/logs/32
+POST http://localhost:8080/users/1/logs/34
 Content-Type: application/json
 
 {
-  "size": "BIG",
-  "color": "BROWN",
-  "softness": "NORMAL"
+  "size": "GINORMOUS",
+  "color": "DARK_BROWN",
+  "softness": "SOFT"
 }
