@@ -14,4 +14,4 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/foods/5
+DELETE http://localhost:8080/foods/17

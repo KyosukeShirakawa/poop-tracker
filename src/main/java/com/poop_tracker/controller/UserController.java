@@ -2,6 +2,7 @@ package com.poop_tracker.controller;
 
 import com.poop_tracker.dto.CreateUserDTO;
 import com.poop_tracker.dto.UserDTO;
+import com.poop_tracker.entity.Food;
 import com.poop_tracker.service.impl.UserServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,23 @@ public class UserController {
     ResponseEntity<String> deleteUser(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.deleteUser(userId));
     }
+
+    @GetMapping("/{userId}/safe-foods")
+    ResponseEntity<List<Food>> getSafeFoods(@PathVariable Long userId) {
+        return ResponseEntity.ok(userService.getSafeFoods(userId));
+    }
+
+
+    @PostMapping("/{userId}/safe-foods")
+    ResponseEntity<UserDTO> addFoodToSafeList(@PathVariable Long userId, @RequestBody String foodname) {
+        return ResponseEntity.ok(userService.addFoodToSafeList(userId, foodname));
+    }
+
+    @DeleteMapping("/{userId}/safe-foods/{foodId}")
+    ResponseEntity<String> getSafeFoods(@PathVariable Long userId, @PathVariable Long foodId) {
+        return ResponseEntity.ok(userService.removeFoodFromSafeList(userId, foodId));
+    }
+
 
 
 }
