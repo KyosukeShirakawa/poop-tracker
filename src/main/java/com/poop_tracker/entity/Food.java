@@ -17,7 +17,4 @@ public class Food {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
-    @ManyToMany(mappedBy = "foodsEaten")
-    private Set<DailyLog> dailyLogs;
 }

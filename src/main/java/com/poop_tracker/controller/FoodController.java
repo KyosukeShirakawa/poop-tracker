@@ -23,4 +23,9 @@ public class FoodController {
     public ResponseEntity<Food> createFood(@RequestBody Food food) {
         return ResponseEntity.ok(foodService.createFood(food));
     }
+
+    @DeleteMapping("/{foodId}")
+    public ResponseEntity<String> deleteFood(@PathVariable Long foodId) {
+        return ResponseEntity.ok(foodService.deleteFoodById(foodId));
+    }
 }

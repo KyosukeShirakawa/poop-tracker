@@ -6,5 +6,9 @@ POST http://localhost:8080/foods
 Content-Type: application/json
 
 {
-  "name": "banana"
+  "name": "chicken thigh"
 }
+
+
+###
+DELETE http://localhost:8080/foods/3
