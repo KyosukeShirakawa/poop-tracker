@@ -1,21 +1,21 @@
-### GET request to example server
+### GET all logs by user id
 GET http://localhost:8080/users/1/logs
 
-###
+### GET log by date
 GET http://localhost:8080/users/1/logs/2026-02-23
 
 
-###
+### POST log
 POST http://localhost:8080/users/14/logs
 Content-Type: application/json
 
 {
 }
 
-####
+#### DELETE log by id
 DELETE http://localhost:8080/users/9/logs/27
 
-####
+#### POST poop to log by id
 POST http://localhost:8080/users/1/logs/34
 Content-Type: application/json
 
@@ -25,7 +25,7 @@ Content-Type: application/json
   "softness": "SOFT"
 }
 
-####
+#### POST foodseaten to log
 POST http://localhost:8080/users/14/logs/36/foods
 Content-Type: application/json
 

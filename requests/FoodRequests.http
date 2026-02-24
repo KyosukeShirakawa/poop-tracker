@@ -1,11 +1,11 @@
-### GET request to example server
+### GET all foods
 GET http://localhost:8080/foods
 
-###
+### GET food by name
 GET http://localhost:8080/foods/WALNUTS
 
 
-###
+### POST food
 POST http://localhost:8080/foods
 Content-Type: application/json
 
@@ -13,5 +13,5 @@ Content-Type: application/json
   "name": "coffee"
 }
 
-###
+### DELETE food by id
 DELETE http://localhost:8080/foods/17
