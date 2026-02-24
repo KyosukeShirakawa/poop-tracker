@@ -2,11 +2,11 @@
 GET http://localhost:8080/users/1/logs
 
 ### GET log by date
-GET http://localhost:8080/users/1/logs/2026-02-23
+GET http://localhost:8080/users/1/logs/2026-02-24
 
 
 ### POST log
-POST http://localhost:8080/users/14/logs
+POST http://localhost:8080/users/1/logs
 Content-Type: application/json
 
 {

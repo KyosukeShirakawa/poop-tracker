@@ -10,13 +10,10 @@ import com.poop_tracker.repository.FoodRepository;
 import com.poop_tracker.repository.UserRepository;
 import com.poop_tracker.service.IUserService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import tools.jackson.databind.cfg.MapperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -94,4 +91,26 @@ public class UserServiceImpl implements IUserService {
         userRepository.save(user);
         return "Food is successfully removed from the safe list";
     }
+
+    @Override
+    public UserDTO addFoodToAvoidList(Long userId, String foodname) {
+        User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("User not found with Id: " + userId));
+        Food food = foodRepository.findByName(foodname).orElseGet(() -> foodRepository.save(new Food(foodname)));
+
+        user.getAvoidFoodList().add(food);
+
+        return UserMapper.mapToUserDto(userRepository.save(user));
+    }
+
+    @Override
+    public String removeFoodFromAvoidList(Long userId, Long foodId) {
+        User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("User not found with Id: " + userId));
+        Food food = foodRepository.findById(foodId).orElseThrow(() -> new ResourceNotFoundException("Food not found with Id: " + foodId));
+
+        user.getAvoidFoodList().remove(food);
+
+        userRepository.save(user);
+        return "Food is successfully removed from the avoid list";
+    }
+
 }

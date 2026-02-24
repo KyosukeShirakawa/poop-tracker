@@ -31,8 +31,18 @@ GET  http://localhost:8080/users/1/safe-foods
 POST http://localhost:8080/users/1/safe-foods
 Content-Type: application/json
 
-chicken thigh
+rice
 
 ### DELETE food from safe food list by id
 DELETE  http://localhost:8080/users/1/safe-foods/17
+
+### POST food to the avoid list by user id
+POST http://localhost:8080/users/1/avoid-foods
+Content-Type: application/json
+
+almonds
+
+### DELETE food from the avoid food list by id
+DELETE  http://localhost:8080/users/1/avoid-foods/17
+
 

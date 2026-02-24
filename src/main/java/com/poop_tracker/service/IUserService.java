@@ -15,5 +15,8 @@ public interface IUserService {
     List<Food> getSafeFoods(Long userId);
     UserDTO addFoodToSafeList(Long userId, String foodname);
     String removeFoodFromSafeList(Long userId, Long foodId);
+    UserDTO addFoodToAvoidList(Long userId, String foodname);
+    String removeFoodFromAvoidList(Long userId, Long foodId);
+
 
 }
