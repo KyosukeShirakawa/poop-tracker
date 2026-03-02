@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/users/{userId}/logs")
 @AllArgsConstructor
+@CrossOrigin
 public class DailyLogController {
     DailyLogServiceImpl dailyLogService;
     @GetMapping
