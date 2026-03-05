@@ -14,7 +14,6 @@ import java.util.Set;
 @Slf4j
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
 @Data
 public class User {
     @Id
@@ -40,6 +39,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "food_id"))
     private Set<Food> avoidFoodList;
 
+    public User() {
+        logs = new ArrayList<>();
+        safeFoodList = new HashSet<>();
+        avoidFoodList = new HashSet<>();
+    }
 
     public User(String name) {
         logs = new ArrayList<>();

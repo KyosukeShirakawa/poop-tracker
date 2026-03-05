@@ -46,8 +46,6 @@ public class UserMapper {
         user.setId(userDto.getId());
         user.setName(userDto.getName());
         user.setPassword(userDto.getPassword());
-        user.setSafeFoodList(userDto.getSafeFoodList());
-        user.setAvoidFoodList(userDto.getAvoidFoodList());
 
         return user;
     }
