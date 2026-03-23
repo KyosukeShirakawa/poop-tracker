@@ -28,15 +28,14 @@ public class DailyLogController {
     }
 
     @PostMapping
-    public ResponseEntity<DailyLogDto> createDailyLog(@PathVariable Long userId) {
-        return ResponseEntity.ok(dailyLogService.createDailyLog(userId));
+    public ResponseEntity<DailyLogDto> createDailyLog(@PathVariable Long userId, @RequestBody DailyLogDto dailyLogDto) {
+        return ResponseEntity.ok(dailyLogService.createDailyLog(userId, dailyLogDto));
     }
 
     @DeleteMapping("/{logId}")
     public ResponseEntity<String> deleteDailyLog(@PathVariable Long userId, @PathVariable Long logId) {
         return ResponseEntity.ok(dailyLogService.deleteDailyLog(userId, logId));
     }
-
     @PostMapping("/{logId}")
     public ResponseEntity<DailyLogDto> recordPoopToDailyLog(@PathVariable Long userId, @PathVariable Long logId, @RequestBody PoopDTO poopDTO) {
         return ResponseEntity.ok(dailyLogService.recordPoopToDailyLog(userId, logId, poopDTO));

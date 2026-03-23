@@ -46,9 +46,9 @@ public class DailyLogServiceImpl implements IDailyLogService {
 
     @Override
     @Transactional
-    public DailyLogDto createDailyLog(Long userId) {
+    public DailyLogDto createDailyLog(Long userId, DailyLogDto dailyLogDto) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user not found with Id: "+ userId));
-        DailyLog dailyLog = new DailyLog(user);
+        DailyLog dailyLog = DailyLogMapper.mapToDailyLog(dailyLogDto);
         user.getLogs().add(dailyLog);
         dailyLog.setUser(user);
         userRepository.save(user);

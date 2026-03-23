@@ -1,5 +1,6 @@
 package com.poop_tracker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,5 +18,6 @@ public class Poop {
     private Color color;
     private Softness softness;
     @OneToOne
+    @JsonIgnore
     private DailyLog log;
 }

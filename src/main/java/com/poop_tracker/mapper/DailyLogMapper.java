@@ -25,11 +25,15 @@ public class DailyLogMapper {
             return null;
         }
         DailyLog dailyLog = new DailyLog();
-        Poop poop = dailyLog.getPoop();
 
         dailyLog.setId(dailyLogDto.getId());
-        dailyLog.setPoop(poop);
-        dailyLog.setDate(dailyLogDto.getDate());
+        if(dailyLogDto.getPoopDTO() != null) {
+            Poop poop = PoopMapper.mapToPoop(dailyLogDto.getPoopDTO());
+            dailyLog.setPoop(poop);
+        }
+        if(dailyLogDto.getDate()!=null) {
+            dailyLog.setDate(dailyLogDto.getDate());
+        }
         dailyLog.setFoodsEaten(dailyLogDto.getFoodsEaten());
 
         return dailyLog;
