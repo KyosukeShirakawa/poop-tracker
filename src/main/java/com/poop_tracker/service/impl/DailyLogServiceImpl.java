@@ -48,7 +48,16 @@ public class DailyLogServiceImpl implements IDailyLogService {
     @Transactional
     public DailyLogDto createDailyLog(Long userId, DailyLogDto dailyLogDto) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user not found with Id: "+ userId));
+
+        List<String> foodnames = dailyLogDto.getFoodsEaten().stream().map( food -> food.getName().trim().toLowerCase()).toList();
+        List<Food> foodObjToSave = foodnames.stream().map(food ->
+                foodRepository.findByName(food)
+                        .orElseGet(() -> foodRepository.save(new Food(food)))
+                ).toList();
+
         DailyLog dailyLog = DailyLogMapper.mapToDailyLog(dailyLogDto);
+        foodObjToSave.forEach((food) ->dailyLog.getFoodsEaten().add(food));
+
         user.getLogs().add(dailyLog);
         dailyLog.setUser(user);
         userRepository.save(user);

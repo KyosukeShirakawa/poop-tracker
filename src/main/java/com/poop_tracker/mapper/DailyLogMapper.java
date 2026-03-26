@@ -3,7 +3,10 @@ package com.poop_tracker.mapper;
 import com.poop_tracker.dto.DailyLogDto;
 import com.poop_tracker.dto.PoopDTO;
 import com.poop_tracker.entity.DailyLog;
+import com.poop_tracker.entity.Food;
 import com.poop_tracker.entity.Poop;
+
+import java.util.List;
 
 public class DailyLogMapper {
     public static DailyLogDto mapToDailyLogDto(DailyLog dailyLog) {
@@ -12,7 +15,6 @@ public class DailyLogMapper {
         }
         DailyLogDto dailyLogDto = new DailyLogDto();
         PoopDTO poopDTO = PoopMapper.mapToPoopDto(dailyLog.getPoop());
-
         dailyLogDto.setId(dailyLog.getId());
         dailyLogDto.setPoopDTO(poopDTO);
         dailyLogDto.setDate(dailyLog.getDate());
@@ -25,8 +27,9 @@ public class DailyLogMapper {
             return null;
         }
         DailyLog dailyLog = new DailyLog();
-
-        dailyLog.setId(dailyLogDto.getId());
+        if(dailyLogDto.getId() != null) {
+            dailyLog.setId(dailyLogDto.getId());
+        }
         if(dailyLogDto.getPoopDTO() != null) {
             Poop poop = PoopMapper.mapToPoop(dailyLogDto.getPoopDTO());
             dailyLog.setPoop(poop);
@@ -34,7 +37,6 @@ public class DailyLogMapper {
         if(dailyLogDto.getDate()!=null) {
             dailyLog.setDate(dailyLogDto.getDate());
         }
-        dailyLog.setFoodsEaten(dailyLogDto.getFoodsEaten());
 
         return dailyLog;
     }

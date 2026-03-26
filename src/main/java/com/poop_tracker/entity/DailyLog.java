@@ -46,7 +46,7 @@ public class DailyLog {
         joinColumns = @JoinColumn(name = "dailylog_id"),
         inverseJoinColumns = @JoinColumn(name = "food_id")
     )
-    private Set<Food> foodsEaten;
+    private Set<Food> foodsEaten = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name="user_id")
