@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -64,6 +65,24 @@ public class DailyLogServiceImpl implements IDailyLogService {
 
         return DailyLogMapper.mapToDailyLogDto(dailyLog);
     }
+
+    @Override
+    public DailyLogDto updateDailyLog(Long userId, Long logId, DailyLogDto updatedLogDto) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user not found with Id: "+ userId));
+
+        DailyLog dailyLog = dailyLogRepository.findById(logId).orElseThrow(() -> new ResourceNotFoundException("Log not found with id: " + logId));
+
+        List<String> foodnames = updatedLogDto.getFoodsEaten().stream().map( food -> food.getName().trim().toLowerCase()).toList();
+        List<Food> foodObjToSave = foodnames.stream().map(food ->
+                foodRepository.findByName(food)
+                        .orElseGet(() -> foodRepository.save(new Food(food)))
+        ).toList();
+        foodObjToSave.forEach((food) ->dailyLog.getFoodsEaten().add(food));
+
+        Poop updatedPoop = PoopMapper.mapToPoop(updatedLogDto.getPoopDTO());
+        dailyLog.setPoop(updatedPoop);
+
+        return DailyLogMapper.mapToDailyLogDto(dailyLog);    }
 
     @Override
     public String deleteDailyLog(Long userId, Long logId) {

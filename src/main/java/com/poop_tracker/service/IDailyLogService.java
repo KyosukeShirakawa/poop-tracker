@@ -13,4 +13,5 @@ public interface IDailyLogService {
     String deleteDailyLog(Long userId, Long logId);
     DailyLogDto recordPoopToDailyLog(Long userId, Long logId, PoopDTO poopDTO);
     DailyLogDto addFoodsToLog(Long userId, Long logId, List<String> foods);
+    DailyLogDto updateDailyLog(Long userId, Long logId, DailyLogDto dailyLogDto);
 }

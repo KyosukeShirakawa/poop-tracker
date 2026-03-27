@@ -32,6 +32,11 @@ public class DailyLogController {
         return ResponseEntity.ok(dailyLogService.createDailyLog(userId, dailyLogDto));
     }
 
+    @PutMapping("/{logId}")
+    public ResponseEntity<DailyLogDto> updateDailyLog(@PathVariable Long userId,@PathVariable Long logId, @RequestBody DailyLogDto dailyLogDto) {
+        return ResponseEntity.ok(dailyLogService.updateDailyLog(userId, logId, dailyLogDto));
+    }
+
     @DeleteMapping("/{logId}")
     public ResponseEntity<String> deleteDailyLog(@PathVariable Long userId, @PathVariable Long logId) {
         return ResponseEntity.ok(dailyLogService.deleteDailyLog(userId, logId));
