@@ -79,8 +79,13 @@ public class DailyLogServiceImpl implements IDailyLogService {
         ).toList();
         foodObjToSave.forEach((food) ->dailyLog.getFoodsEaten().add(food));
 
-        Poop updatedPoop = PoopMapper.mapToPoop(updatedLogDto.getPoopDTO());
-        dailyLog.setPoop(updatedPoop);
+        if(updatedLogDto.getPoopDTO() != null) {
+            Poop updatedPoop = PoopMapper.mapToPoop(updatedLogDto.getPoopDTO());
+            dailyLog.setPoop(updatedPoop);
+        } else {
+            dailyLog.setPoop(null);
+        }
+        dailyLogRepository.save(dailyLog);
 
         return DailyLogMapper.mapToDailyLogDto(dailyLog);    }
 
