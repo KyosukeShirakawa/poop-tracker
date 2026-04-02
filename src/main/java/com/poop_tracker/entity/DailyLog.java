@@ -32,12 +32,10 @@ public class DailyLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "poop_id")
     private Poop poop;
 
-    @CreationTimestamp
-    @Column(nullable = false)
     private LocalDate date;
 
     @ManyToMany

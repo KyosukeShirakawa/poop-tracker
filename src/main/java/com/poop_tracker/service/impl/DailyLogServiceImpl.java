@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +51,16 @@ public class DailyLogServiceImpl implements IDailyLogService {
     public DailyLogDto createDailyLog(Long userId, DailyLogDto dailyLogDto) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user not found with Id: "+ userId));
 
+        System.out.println(dailyLogDto);
+
+        List<Food> foods = new ArrayList<>();
+
+        for (Food f : dailyLogDto.getFoodsEaten()) {
+            if(f.getId() != null) {
+
+            }
+        }
+
         List<String> foodnames = dailyLogDto.getFoodsEaten().stream().map( food -> food.getName().trim().toLowerCase()).toList();
         List<Food> foodObjToSave = foodnames.stream().map(food ->
                 foodRepository.findByName(food)
@@ -73,19 +84,35 @@ public class DailyLogServiceImpl implements IDailyLogService {
         DailyLog dailyLog = dailyLogRepository.findById(logId).orElseThrow(() -> new ResourceNotFoundException("Log not found with id: " + logId));
 
         List<String> foodnames = updatedLogDto.getFoodsEaten().stream().map( food -> food.getName().trim().toLowerCase()).toList();
-        List<Food> foodObjToSave = foodnames.stream().map(food ->
-                foodRepository.findByName(food)
-                        .orElseGet(() -> foodRepository.save(new Food(food)))
-        ).toList();
-        foodObjToSave.forEach((food) ->dailyLog.getFoodsEaten().add(food));
 
+        List<Food> foodObjToSave = foodnames.stream()
+                .map(food ->
+                    foodRepository.findByName(food)
+                        .orElseGet(() -> foodRepository.save(new Food(food)))
+                ).toList();
+        dailyLog.getFoodsEaten().clear();
+        dailyLog.getFoodsEaten().addAll(foodObjToSave);
         if(updatedLogDto.getPoopDTO() != null) {
-            Poop updatedPoop = PoopMapper.mapToPoop(updatedLogDto.getPoopDTO());
-            dailyLog.setPoop(updatedPoop);
+            if (dailyLog.getPoop() != null) {
+                Poop existingPoop = dailyLog.getPoop();
+                PoopDTO dto = updatedLogDto.getPoopDTO();
+
+                existingPoop.setSize(dto.getSize());
+                existingPoop.setColor(dto.getColor());
+                existingPoop.setSoftness(dto.getSoftness());
+            } else {
+                Poop newPoop = PoopMapper.mapToPoop(updatedLogDto.getPoopDTO());
+                newPoop.setLog(dailyLog);
+                dailyLog.setPoop(newPoop);
+            }
+
         } else {
             dailyLog.setPoop(null);
         }
+
+
         dailyLogRepository.save(dailyLog);
+
 
         return DailyLogMapper.mapToDailyLogDto(dailyLog);    }
 
