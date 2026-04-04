@@ -16,12 +16,10 @@ public class PoopMapper {
         return  poopDTO;
     }
     public static Poop mapToPoop(PoopDTO poopDTO) {
-        System.out.println(poopDTO);
         Poop poop = new Poop();
         poop.setColor(poopDTO.getColor());
         poop.setSize(poopDTO.getSize());
         poop.setSoftness(poopDTO.getSoftness());
-        System.out.println(poop);
 
         return poop;
     }

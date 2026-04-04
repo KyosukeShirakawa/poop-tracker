@@ -49,18 +49,19 @@ public class UserController {
 
 
     @PostMapping("/{userId}/safe-foods")
-    ResponseEntity<UserDTO> addFoodToSafeList(@PathVariable Long userId, @RequestBody String foodname) {
-        return ResponseEntity.ok(userService.addFoodToSafeList(userId, foodname));
+    ResponseEntity<Food> addFoodToSafeList(@PathVariable Long userId, @RequestBody Food food) {
+        System.out.println(food);
+        return ResponseEntity.ok(userService.addFoodToSafeList(userId, food));
     }
 
     @DeleteMapping("/{userId}/safe-foods/{foodId}")
-    ResponseEntity<String> getSafeFoods(@PathVariable Long userId, @PathVariable Long foodId) {
+    ResponseEntity<List<Food>> getSafeFoods(@PathVariable Long userId, @PathVariable Long foodId) {
         return ResponseEntity.ok(userService.removeFoodFromSafeList(userId, foodId));
     }
 
     @PostMapping("/{userId}/avoid-foods")
-    ResponseEntity<UserDTO> addFoodToAvoidList(@PathVariable Long userId, @RequestBody String foodname) {
-        return ResponseEntity.ok(userService.addFoodToAvoidList(userId, foodname));
+    ResponseEntity<Food> addFoodToAvoidList(@PathVariable Long userId, @RequestBody Food food) {
+        return ResponseEntity.ok(userService.addFoodToAvoidList(userId, food));
     }
 
     @DeleteMapping("/{userId}/avoid-foods/{foodId}")

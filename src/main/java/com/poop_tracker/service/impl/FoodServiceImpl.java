@@ -1,18 +1,24 @@
 package com.poop_tracker.service.impl;
 
 import com.poop_tracker.entity.Food;
+import com.poop_tracker.entity.User;
 import com.poop_tracker.exception.ResourceNotFoundException;
 import com.poop_tracker.repository.FoodRepository;
+import com.poop_tracker.repository.UserRepository;
 import com.poop_tracker.service.IFoodService;
+import com.poop_tracker.utils.FoodUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
 public class FoodServiceImpl implements IFoodService {
     FoodRepository foodRepository;
+    UserRepository userRepository;
+
     public List<Food> getAllFoods(){
         return foodRepository.findAll();
     }
@@ -25,7 +31,7 @@ public class FoodServiceImpl implements IFoodService {
 
     @Override
     public Food createFood(Food food) {
-        String foodName = food.getName().trim().toLowerCase();
+        String foodName = FoodUtil.normalizeName(food.getName());
         food.setName(foodName);
 
        return  foodRepository.findByName(foodName).orElseGet(() -> foodRepository.save(food));

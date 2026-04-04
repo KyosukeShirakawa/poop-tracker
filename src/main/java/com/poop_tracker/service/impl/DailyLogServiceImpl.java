@@ -51,7 +51,6 @@ public class DailyLogServiceImpl implements IDailyLogService {
     public DailyLogDto createDailyLog(Long userId, DailyLogDto dailyLogDto) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("user not found with Id: "+ userId));
 
-        System.out.println(dailyLogDto);
 
         List<Food> foods = new ArrayList<>();
 
@@ -93,18 +92,17 @@ public class DailyLogServiceImpl implements IDailyLogService {
         dailyLog.getFoodsEaten().clear();
         dailyLog.getFoodsEaten().addAll(foodObjToSave);
         if(updatedLogDto.getPoopDTO() != null) {
-            if (dailyLog.getPoop() != null) {
-                Poop existingPoop = dailyLog.getPoop();
-                PoopDTO dto = updatedLogDto.getPoopDTO();
+            Poop poop = dailyLog.getPoop();
+            PoopDTO dto = updatedLogDto.getPoopDTO();
 
-                existingPoop.setSize(dto.getSize());
-                existingPoop.setColor(dto.getColor());
-                existingPoop.setSoftness(dto.getSoftness());
-            } else {
-                Poop newPoop = PoopMapper.mapToPoop(updatedLogDto.getPoopDTO());
-                newPoop.setLog(dailyLog);
-                dailyLog.setPoop(newPoop);
+            if (poop == null) {
+                poop = new Poop();
+                poop.setLog(dailyLog);
+                dailyLog.setPoop(poop);
             }
+            poop.setSize(dto.getSize());
+            poop.setColor(dto.getColor());
+            poop.setSoftness(dto.getSoftness());
 
         } else {
             dailyLog.setPoop(null);

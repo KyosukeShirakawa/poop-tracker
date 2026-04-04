@@ -9,6 +9,7 @@ import com.poop_tracker.mapper.UserMapper;
 import com.poop_tracker.repository.FoodRepository;
 import com.poop_tracker.repository.UserRepository;
 import com.poop_tracker.service.IUserService;
+import com.poop_tracker.utils.FoodUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -72,34 +73,40 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public UserDTO addFoodToSafeList(Long userId, String foodname) {
+    public Food addFoodToSafeList(Long userId, Food foodToAdd) {
+
         User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("User not found with Id: " + userId));
+        String foodname = FoodUtil.normalizeName(foodToAdd.getName());
         Food food = foodRepository.findByName(foodname).orElseGet(() -> foodRepository.save(new Food(foodname)));
 
         user.getSafeFoodList().add(food);
 
-        return UserMapper.mapToUserDto(userRepository.save(user));
+        UserMapper.mapToUserDto(userRepository.save(user));
+        return food;
     }
 
     @Override
-    public String removeFoodFromSafeList(Long userId, Long foodId) {
+    public List<Food> removeFoodFromSafeList(Long userId, Long foodId) {
         User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("User not found with Id: " + userId));
         Food food = foodRepository.findById(foodId).orElseThrow(() -> new ResourceNotFoundException("Food not found with Id: " + foodId));
 
         user.getSafeFoodList().remove(food);
 
         userRepository.save(user);
-        return "Food is successfully removed from the safe list";
+
+        return new ArrayList<>(user.getSafeFoodList());
     }
 
     @Override
-    public UserDTO addFoodToAvoidList(Long userId, String foodname) {
+    public Food addFoodToAvoidList(Long userId, Food foodToAdd) {
         User user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("User not found with Id: " + userId));
-        Food food = foodRepository.findByName(foodname).orElseGet(() -> foodRepository.save(new Food(foodname)));
+        Food food = foodRepository.findByName(foodToAdd.getName()).orElseGet(() -> foodRepository.save(new Food(foodToAdd.getName())));
 
         user.getAvoidFoodList().add(food);
 
-        return UserMapper.mapToUserDto(userRepository.save(user));
+        UserMapper.mapToUserDto(userRepository.save(user));
+
+        return food;
     }
 
     @Override

@@ -10,18 +10,13 @@ import java.util.List;
 
 public class UserMapper {
     public static UserDTO mapToUserDto(User user) {
-        System.out.println("mapToUserDto-======== user id: " + user.getId() + " user name: " + user.getName()) ;
         UserDTO userDto =  new UserDTO();
-        System.out.println("userDto " + userDto);
         userDto.setId(user.getId());
-        System.out.println("userDto id" + userDto.getId());
         userDto.setName(user.getName());
-        System.out.println("userDto name" + userDto.getName());
         List<DailyLog> logs = user.getLogs();
         if(logs != null) {
             userDto.setLogs(logs.stream().map((log)-> DailyLogMapper.mapToDailyLogDto(log)).toList());
         }
-        System.out.println("after calling logs mapper mapToUserDto-========");
 
         userDto.setSafeFoodList(user.getSafeFoodList());
         userDto.setAvoidFoodList(user.getAvoidFoodList());

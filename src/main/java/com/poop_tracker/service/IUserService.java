@@ -13,9 +13,9 @@ public interface IUserService {
     UserDTO updateUserById(Long userID, CreateUserDTO userDTO);
     String deleteUser(Long userId);
     List<Food> getSafeFoods(Long userId);
-    UserDTO addFoodToSafeList(Long userId, String foodname);
-    String removeFoodFromSafeList(Long userId, Long foodId);
-    UserDTO addFoodToAvoidList(Long userId, String foodname);
+    Food addFoodToSafeList(Long userId, Food food);
+    List<Food> removeFoodFromSafeList(Long userId, Long foodId);
+    Food addFoodToAvoidList(Long userId, Food food);
     String removeFoodFromAvoidList(Long userId, Long foodId);
 
 
