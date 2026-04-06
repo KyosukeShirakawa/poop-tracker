@@ -14,4 +14,5 @@ public class PoopDTO {
     private Size size;
     private Color color;
     private Softness softness;
+    private Integer score;
 }

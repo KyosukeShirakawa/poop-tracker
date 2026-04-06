@@ -2,6 +2,7 @@ package com.poop_tracker.mapper;
 
 import com.poop_tracker.dto.PoopDTO;
 import com.poop_tracker.entity.Poop;
+import com.poop_tracker.utils.PoopUtil;
 
 public class PoopMapper {
     public static PoopDTO mapToPoopDto(Poop poop) {
@@ -12,6 +13,7 @@ public class PoopMapper {
         poopDTO.setColor(poop.getColor());
         poopDTO.setSize(poop.getSize());
         poopDTO.setSoftness(poop.getSoftness());
+        poopDTO.setScore(PoopUtil.calculateScore(poop));
 
         return  poopDTO;
     }
