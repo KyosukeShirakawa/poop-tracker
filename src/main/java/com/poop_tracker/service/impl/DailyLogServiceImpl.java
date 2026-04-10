@@ -92,10 +92,12 @@ public class DailyLogServiceImpl implements IDailyLogService {
         dailyLog.getFoodsEaten().clear();
         dailyLog.getFoodsEaten().addAll(foodObjToSave);
         if(updatedLogDto.getPoopDTO() != null) {
+            //poop update is coming
             Poop poop = dailyLog.getPoop();
             PoopDTO dto = updatedLogDto.getPoopDTO();
 
             if (poop == null) {
+                // creating new poop if it wasnt set
                 poop = new Poop();
                 poop.setLog(dailyLog);
                 dailyLog.setPoop(poop);
@@ -108,9 +110,7 @@ public class DailyLogServiceImpl implements IDailyLogService {
             dailyLog.setPoop(null);
         }
 
-
         dailyLogRepository.save(dailyLog);
-
 
         return DailyLogMapper.mapToDailyLogDto(dailyLog);    }
 

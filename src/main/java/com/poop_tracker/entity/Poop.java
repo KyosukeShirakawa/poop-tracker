@@ -18,6 +18,7 @@ public class Poop {
     private Color color;
     private Softness softness;
     @OneToOne
+    @JoinColumn(name = "log_id", unique = true)
     @JsonIgnore
     private DailyLog log;
 }

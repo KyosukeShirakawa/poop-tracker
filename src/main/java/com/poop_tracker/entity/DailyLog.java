@@ -32,8 +32,7 @@ public class DailyLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "poop_id")
+    @OneToOne(mappedBy ="log", cascade = CascadeType.ALL, orphanRemoval = true)
     private Poop poop;
 
     private LocalDate date;
